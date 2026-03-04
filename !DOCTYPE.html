@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>有趣死了</title>
+    <style>
+        body { 
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 500px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #ff6b6b;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background: #ff5252; }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        .tip {
+            font-size: 14px;
+            color: #ffd700;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>🎮 猜梗游戏</h2>
+    <p>输入文字，看看能触发什么彩蛋！</p >
+    
+    <input type="text" id="inputStr" placeholder="在这里输入...">
+    <button onclick="check()">提交答案</button>
+    
+    <div id="result">等待输入...</div>
+    <div class="tip">提示：菜就多练</div>
+
+    <script>
+    function check() {
+        let str = document.getElementById('inputStr').value;
+        let result = document.getElementById('result');
+        
+        if(str === "") {
+            result.innerHTML = "❌ 请输入内容";
+            return;
+        }
+        
+        let lowerStr = str.toLowerCase();
+        let hasJ = lowerStr.includes('j');
+        let hasN = lowerStr.includes('n');
+        let hasT = lowerStr.includes('t');
+        let hasM = lowerStr.includes('m');
+        
+        if(hasJ && hasN && hasT && hasM) {
+            result.innerHTML = "🎤 蔡徐坤<br>🐔 鸡你太美";
+            result.style.background = "#ffd700";
+            result.style.color = "#000";
+        }
+        else if(str.includes('辛巴巴巴鲁比拉')) {
+            result.innerHTML = "🚽 丹尼尔今天晚上会去你家偷马桶盖<br>不想被偷就发给另一个人，让ta看";
+            result.style.background = "#87ceeb";
+            result.style.color = "#000";
+        }
+        else {
+            result.innerHTML = "❌ 没有触发彩蛋<br>Tip：鸡的梗，或，丹尼尔的梗<br>回去重猜，gun";
+            result.style.background = "rgba(255,255,255,0.2)";
+            result.style.color = "white";
+        }
+    }
+    
+    // 支持回车提交
+    document.getElementById('inputStr').addEventListener('keypress', function(e) {
+        if(e.key === 'Enter') {
+            check();
+        }
+    });
+    </script>
+</body>
+</html>
